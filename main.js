@@ -35,7 +35,7 @@ function drawBackground(background, beachImg, text) {
 function initStage(images) {
     var stage = new Konva.Stage({
         container: 'container',
-        width: 1000,
+        width: width,
         height: height
     });
 
@@ -62,7 +62,8 @@ function initStage(images) {
                 image: images[key],
                 x: anim.x,
                 y: anim.y,
-                draggable: true
+                draggable: true,
+                name: "overlayObjName"
             });
 
             overLay.on('dragstart', function () {
@@ -79,6 +80,31 @@ function initStage(images) {
         })();
     }
 
+    // begin transform attempt
+    stage.on('click', function (e) {
+        // if click on empty area - remove all transformers
+        if (e.target === stage) {
+          stage.find('Transformer').destroy();
+          overLayer.draw();
+          return;
+        }
+        // do nothing if clicked NOT on our rectangles
+        if (!e.target.hasName('overlayObjName')) {
+          return;
+        }
+        // remove old transformers
+        // TODO: we can skip it if current rect is already selected
+        stage.find('Transformer').destroy();
+  
+        // create new transformer
+        var tr = new Konva.Transformer();
+        overLayer.add(tr);
+        tr.attachTo(e.target);
+        overLayer.draw();
+      })
+
+    // end transform attempt
+
     stage.add(background);
     stage.add(overLayer);
 
@@ -90,6 +116,7 @@ var sources = {
     background: 'baby3.jpg',
     overLay: 'overlay-two-dark.png'
 };
+
 loadImages(sources, initStage);
 
 
