@@ -66,14 +66,14 @@ function initStage(images) {
                 name: "overlayObjName"
             });
 
-            overLay.on('dragstart', function () {
-                this.moveToTop();
-                overLayer.draw();
-            });
+            // overLay.on('dragmove', function () {
+            //     document.body.style.cursor = 'pointer';
+            // });
 
-            overLay.on('dragmove', function () {
-                document.body.style.cursor = 'pointer';
-            });
+            // DONT FORGET MOBILE EVENTS TOO
+            //overLay.on('click touchstart', function (event) {
+                //alert("boo-yah, grandma... ", event);
+            //});
 
             overLayer.add(overLay);
             animalShapes.push(overLay);
@@ -81,27 +81,31 @@ function initStage(images) {
     }
 
     // begin transform attempt
-    stage.on('click', function (e) {
+    stage.on('click touchstart', function (event) {
+        focusLayer(event);
+    });
+
+    function focusLayer(event) {
         // if click on empty area - remove all transformers
-        if (e.target === stage) {
-          stage.find('Transformer').destroy();
-          overLayer.draw();
-          return;
+        if (event.target === stage) {
+            stage.find('Transformer').destroy();
+            overLayer.draw();
+            return;
         }
         // do nothing if clicked NOT on our rectangles
-        if (!e.target.hasName('overlayObjName')) {
-          return;
+        if (!event.target.hasName('overlayObjName')) {
+            return;
         }
-        // remove old transformers
-        // TODO: we can skip it if current rect is already selected
-        stage.find('Transformer').destroy();
-  
-        // create new transformer
+
+        // create new transformer anchors
         var tr = new Konva.Transformer();
         overLayer.add(tr);
-        tr.attachTo(e.target);
+        tr.attachTo(event.target);
+        event.target.moveToTop();
+        document.body.style.cursor = 'pointer';
+
         overLayer.draw();
-      })
+    }
 
     // end transform attempt
 
