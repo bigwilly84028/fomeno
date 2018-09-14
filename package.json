@@ -1,22 +1,19 @@
 {
-  "name": "fomeno",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "name": "static-heroku-nodejs",
+  "version": "0.0.0",
+  "description": "static-heroku-nodejs\r ====================",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bigwilly84028/fomeno.git"
+    "url": "git://github.com/Yankovsky/static-heroku-nodejs.git"
   },
-  "author": "Will Watson",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bigwilly84028/fomeno/issues"
+    "url": "https://github.com/Yankovsky/static-heroku-nodejs/issues"
   },
-  "homepage": "https://github.com/bigwilly84028/fomeno#readme",
-  "devDependencies": {
-    "node-static": "^0.7.10"
-  }
+  "homepage": "https://github.com/Yankovsky/static-heroku-nodejs"
 }
