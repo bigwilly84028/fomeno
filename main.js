@@ -123,6 +123,7 @@ var sources = {
     overLay: 'overlay-two-dark.png'
 };
 
+
 loadImages(sources, initStage);
 
 
