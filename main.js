@@ -42,7 +42,6 @@ function initStage(images) {
     var background = new Konva.Layer();
     var overLayer = new Konva.Layer();
     var animalShapes = [];
-
     // defaul overlay positions
     var overLays = {
         overLay: {
@@ -97,8 +96,7 @@ function initStage(images) {
         if (!event.target.hasName('overlayObjName')) {
             return;
         }
-
-        // create new transformer anchors
+        // create new transformation anchors
         var tr = new Konva.Transformer({
             anchorSize: 20,
             borderDash: [7, 7]
