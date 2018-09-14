@@ -36,7 +36,7 @@ function initStage(images) {
     var stage = new Konva.Stage({
         container: 'container',
         width: width,
-        height: 530
+        height: height
     });
 
     var background = new Konva.Layer();
@@ -46,8 +46,8 @@ function initStage(images) {
     // defaul overlay positions
     var overLays = {
         overLay: {
-            x: 70,
-            y: 70
+            x: 20,
+            y: 20
         }
     };
 
@@ -87,7 +87,7 @@ function initStage(images) {
 }
 
 var sources = {
-    background: 'baby1.jpg',
+    background: 'baby2.jpg',
     overLay: 'overlay-white.png'
 };
 loadImages(sources, initStage);
