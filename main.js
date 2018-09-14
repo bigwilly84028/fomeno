@@ -89,6 +89,7 @@ function initStage(images) {
         // if click on empty area - remove all transformers
         if (event.target === stage) {
             stage.find('Transformer').destroy();
+            document.body.style.cursor = 'default';
             overLayer.draw();
             return;
         }
@@ -98,7 +99,10 @@ function initStage(images) {
         }
 
         // create new transformer anchors
-        var tr = new Konva.Transformer();
+        var tr = new Konva.Transformer({
+            anchorSize: 20,
+            borderDash: [7, 7]
+        });
         overLayer.add(tr);
         tr.attachTo(event.target);
         event.target.moveToTop();
