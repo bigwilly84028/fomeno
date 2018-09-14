@@ -35,7 +35,7 @@ function drawBackground(background, beachImg, text) {
 function initStage(images) {
     var stage = new Konva.Stage({
         container: 'container',
-        width: width,
+        width: 1000,
         height: height
     });
 
@@ -87,8 +87,8 @@ function initStage(images) {
 }
 
 var sources = {
-    background: 'baby2.jpg',
-    overLay: 'overlay-white.png'
+    background: 'baby3.jpg',
+    overLay: 'overlay-two-dark.png'
 };
 loadImages(sources, initStage);
 
