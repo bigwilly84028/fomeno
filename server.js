@@ -8,7 +8,7 @@ const http = require('http'),
     multer = require("multer");
 
 // server setup
-httpServer.listen(3000, () => {
+httpServer.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 });
 
