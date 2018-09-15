@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/bigwilly84028/fomeno/issues"
   },
-  "homepage": "https://github.com/bigwilly84028/fomeno#readme"
+  "homepage": "https://github.com/bigwilly84028/fomeno#readme",
+  "devDependencies": {
+    "express": "^4.16.3"
+  }
 }
