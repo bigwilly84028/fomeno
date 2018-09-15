@@ -46,7 +46,7 @@ function initStage(images) {
     var overLays = {
         overLay: {
             x: 20,
-            y: 20
+            y: 70
         }
     };
 
@@ -71,7 +71,7 @@ function initStage(images) {
 
             // DONT FORGET MOBILE EVENTS TOO
             //overLay.on('click touchstart', function (event) {
-                //alert("boo-yah, grandma... ", event);
+            //alert("boo-yah, grandma... ", event);
             //});
 
             overLayer.add(overLay);
@@ -123,12 +123,41 @@ var sources = {
     overLay: 'overlay-two-dark.png'
 };
 
+
 loadImages(sources, initStage);
 
-$(document).ready(function(){
-    $('#bgredraw').on('click', function(){
-        sources.background = "baby2.jpg";
-        loadImages(sources, initStage);
+$(document).ready(function () {
+    
+    $('#selectFileBtnTrigger').on('click', function () {
+        $('#inputFile').click();
+    });
+
+    $("#uploadForm").submit(function (evt) {
+
+        evt.preventDefault();
+        var formData = new FormData($(this)[0]);
+
+        $.ajax({
+            type: "POST",
+            url: "/assets",
+            data: formData,
+            contentType: false,
+            processData: false,
+            async: false,
+            cache: false,
+            enctype: 'multipart/form-data',
+            success: function (response) {
+                //console.log(JSON.stringify(response));
+                sources.background = response;
+                loadImages(sources, initStage);
+            },
+        });
+
+        return false;
+    });
+
+    $("#inputFile").change(function () {
+        $("#uploadFormSubmit").click();
     });
 });
 

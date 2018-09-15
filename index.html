@@ -15,18 +15,41 @@
       overflow: hidden;
       background-color: #F0F0F0;
     }
+
+    .hide{
+        display: none;
+    }
+
+    .margin-top-fifteen{
+        margin-top: 15px;
+    }
+
+    .margin-bottom-fifteen{
+        margin-bottom: 15px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .btn{
+        padding: 10px;
+    }
+
   </style>
 </head>
 
 <body>
-    <div>
+    <div class="margin-bottom-fifteen margin-top-fifteen text-center">
         <div>
-            <button id="bgredraw">redraw background</button>
+            <button class="btn" id="selectFileBtnTrigger">change background</button>
         </div>
-        <form method="post" enctype="multipart/form-data" action="/uploads">
-            <input type="file" name="file">
-            <input type="submit" value="Submit">
-        </form>
+        <div>
+            <form class="hide" id="uploadForm">
+                <input id="inputFile" type="file" name="file">
+                <input id="uploadFormSubmit" type="submit" value="Submit">
+            </form>
+        </div>
     </div>
     <div id="container"></div>
 </body>
