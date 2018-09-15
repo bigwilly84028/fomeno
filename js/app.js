@@ -126,4 +126,10 @@ var sources = {
 
 loadImages(sources, initStage);
 
+$(document).ready(function(){
+    $('#bgredraw').on('click', function(){
+        
+    });
+});
+
 

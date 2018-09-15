@@ -1,17 +1,61 @@
-var http = require('http'),
-    fs = require('fs')
-var port = process.env.PORT || 3000
-http.createServer(function(req, res) {
-    var url = './' + (req.url == '/' ? 'index.html' : req.url)
-    fs.readFile(url, function(err, html) {
-        if (err) {
-            var message404 = "There is no such page! <a href='/'>Back to home page</a>"
-            res.writeHead(404, {'Content-Type': 'text/html', 'Content-Length': message404.length})
-            res.write(message404)
-        } else {
-            res.writeHead(200, {'Content-Type': 'text/html', 'Content-Length': html.length})
-            res.write(html)
-        }
-        res.end()
-    })
-}).listen(port)
+const http = require('http'),
+    fs = require('fs'),
+    path = require("path"),
+    express = require("express"),
+    app = express(),
+    httpServer = http.createServer(app),
+    port = process.env.PORT || 3000,
+    multer = require("multer");
+
+// server setup
+httpServer.listen(3000, () => {
+    console.log(`Server is listening on port ${port}`);
+});
+
+//routes
+app.get("/", express.static(path.join(__dirname, "./")));
+app.use("/js", express.static(__dirname + '/js'));
+app.use("/assets", express.static(__dirname + '/assets'));
+app.use("/uploads", express.static(__dirname + '/uploads'));
+
+//error handler
+const handleError = (err, res) => {
+    res
+        .status(500)
+        .contentType("text/plain")
+        .end("Oops! Something went wrong!");
+};
+
+const upload = multer({
+    dest: "uploads"
+    // you might also want to set some limits: https://github.com/expressjs/multer#limits
+}); 
+
+app.post(
+    "/uploads",
+    upload.single("file" /* name attribute of <file> element in your form */),
+    (req, res) => {
+      const tempPath = req.file.path;
+      const targetPath = path.join(__dirname, "./uploads/image.png");
+  
+      if (path.extname(req.file.originalname).toLowerCase() === ".png") {
+        fs.rename(tempPath, targetPath, err => {
+          if (err) return handleError(err, res);
+  
+          res
+            .status(200)
+            .contentType("text/plain")
+            .end("File uploaded!");
+        });
+      } else {
+        fs.unlink(tempPath, err => {
+          if (err) return handleError(err, res);
+  
+          res
+            .status(403)
+            .contentType("text/plain")
+            .end("Only .png files are allowed!");
+        });
+      }
+    }
+  ); 
