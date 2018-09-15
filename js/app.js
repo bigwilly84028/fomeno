@@ -119,7 +119,7 @@ function initStage(images) {
 }
 
 var sources = {
-    background: 'baby3.jpg',
+    background: 'watsons-two.png',
     overLay: 'overlay-two-dark.png'
 };
 
