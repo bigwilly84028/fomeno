@@ -27,16 +27,16 @@ const handleError = (err, res) => {
 };
 
 const upload = multer({
-    dest: "uploads"
+    dest: "assets"
     // you might also want to set some limits: https://github.com/expressjs/multer#limits
 }); 
 
 app.post(
-    "/uploads",
+    "/assets",
     upload.single("file" /* name attribute of <file> element in your form */),
     (req, res) => {
       const tempPath = req.file.path;
-      const targetPath = path.join(__dirname, "./uploads/image.png");
+      const targetPath = path.join(__dirname, "./assets/uploadedbgimage.png");
   
       if (path.extname(req.file.originalname).toLowerCase() === ".png") {
         fs.rename(tempPath, targetPath, err => {

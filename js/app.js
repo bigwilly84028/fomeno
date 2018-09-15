@@ -123,12 +123,12 @@ var sources = {
     overLay: 'overlay-two-dark.png'
 };
 
-
 loadImages(sources, initStage);
 
 $(document).ready(function(){
     $('#bgredraw').on('click', function(){
-        
+        sources.background = "baby2.jpg";
+        loadImages(sources, initStage);
     });
 });
 
